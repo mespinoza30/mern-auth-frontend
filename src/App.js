@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <h1>MERN Authentication</h1>
-      <Login />
+      <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
     </div>
   );
 }
