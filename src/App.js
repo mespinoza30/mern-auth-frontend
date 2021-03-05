@@ -1,5 +1,5 @@
 // Imports
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
@@ -15,6 +15,15 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import Welcome from './components/Welcome';
+
+const PrivateRoute = ({ component: component, ...rest}) => {
+  let token = localStorage.getItem('jwtToken');
+  console.log('===> Hitting a private Route');
+  return <Route {...rest} render={(props) => {
+    //check to see if there is a token, hit the compenent it available if there is a token, if not redirect to login
+    return token ? <Component {...rest} {...props} /> : <Redirect to="/login"/>
+  }} /> 
+}
 
 function App() {
   // Set state values
