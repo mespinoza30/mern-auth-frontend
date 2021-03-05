@@ -18,11 +18,11 @@ import Welcome from './components/Welcome';
 
 function App() {
   // Set state values
- 
+
   useEffect(() => {
     let token;
 
-    if(!localStorage.getItem('jwtToken')) {
+    if (!localStorage.getItem('jwtToken')) {
       setisAuthenticated(false);
       console.log('==> Authenticated is now FALSE');
     } else {
@@ -38,10 +38,19 @@ function App() {
     setisAuthenticated(true);
   }
 
+  const handleLogout = () => {
+    if (localStorage.getItem('jwtToken')) {
+      //remove token for localStorage
+      localStorage.removeItem('jwtToken');
+      setCurrentUser(null);
+      setisAuthenticated(false);
+    }
+  }
+
   return (
     <div className="App">
       <h1>MERN Authentication</h1>
-    <Login />
+      <Login />
     </div>
   );
 }
