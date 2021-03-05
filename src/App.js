@@ -60,6 +60,15 @@ function App() {
     <div className="App">
       <h1>MERN Authentication</h1>
       <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
+      <div className="container mt-5">
+        <Switch>
+          <Route path='/signup' component={Signup} />
+          <Route 
+            path="/login"
+            render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
+          />
+        </Switch>
+      </div>
     </div>
   );
 }
