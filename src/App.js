@@ -20,8 +20,23 @@ function App() {
   // Set state values
  
   useEffect(() => {
-    
+    let token;
+
+    if(!localStorage.getItem('jwtToken')) {
+      setisAuthenticated(false);
+      console.log('==> Authenticated is now FALSE');
+    } else {
+      token = jwt_decode(localStorage.getItem('jwtToken'));
+      setAuthToken(localStorage.getItem('jwtToken'));
+      setCurrentUser(token);
+    }
   }, []);
+
+  const nowCurrentUser = (userData) => {
+    console.log('===> nowCurrent is here.');
+    setCurrentUser(userData);
+    setisAuthenticated(true);
+  }
 
   return (
     <div className="App">
